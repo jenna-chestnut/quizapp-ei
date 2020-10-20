@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz App</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="app.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header>
+    <h1>The name of your quiz</h1>
+  </header>
+  <main>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Don't Space Out: A quiz!</title>
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+          rel="stylesheet"
+          type="text/css"
+        />
+        <link href="app.css" rel="stylesheet" type="text/css" />
+      </head>
+    
+      <body>
+        <header>
+          <h1>DON'T SPACE OUT: A Quiz!</h1>
+          (this part stays through whole quiz)
+        </header>
+        <main>
+          <h2>First View</h2>
+          <div class="block">
+            <h3>Ready for blastoff?</h3>
+            <button>
+              Click here!<br />
+              <img
+                src="https://www.seekpng.com/png/full/31-319816_flying-rocket-png-rocket.png"
+                width="100"
+              />
+            </button>
+            <p class="tally">5 questions total!</p>
+          </div>
+    
+          <h2>Questions View</h2>
+          <div class="block questions">
+            <h3>Question 1/5</h3>
+            <form>                
+              <input type="radio" id="A" value="A"></input>
+              <label for="A">Option A</label>
+              <input type="radio" id="B" value="B"></input>
+              <label for="B">Option B</label>
+              <input type="radio" id="C" value="C"></input>
+              <label for="C">Option C</label>
+              <input type="radio" id="D" value="D"></input>
+              <label for="D">Option D</label>
+              <input type="submit" value="submit">
+            </form>
+            <p class="tally">Correct: 0, Incorrect: 0</p>
+          </div>
+    
+          <h2>Answered View</h2>
+          <div class="block">
+            <h3>Correct! (or Incorrect!)</h3>
+            <p>[IMAGE HERE!]</p>
+            <p>The earth is 75% covered in water</p>
+            <button>Next Question</button>
+            <p class="tally">Correct: 1, Incorrect: 0</p>
+          </div>
+    
+          <h2>Final Screen</h2>
+          <div class="block">
+            <h3>Voyage complete!</h3>
+            <p>[IMAGE HERE!]</p>
+            <p>You answered X out of X questions correctly!</p>
+            <button>Try again</button>
+            <p></p>
+            <p><i>"Across the sea of space, the stars are other suns."</i></p>
+            <p>- Carl Sagan</p>
+          </div>
+    
+        </main>
+        <script
+          src="https://code.jquery.com/jquery-3.4.1.slim.js"
+          crossorigin="anonymous"
+        ></script>
+        <script src="app.js"></script>
+      </body>
+    </html>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.js" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
