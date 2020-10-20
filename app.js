@@ -19,7 +19,7 @@ const store = {
       answers: [
         '1970',
         '2015',
-        '2019',
+        '2020',
         '2005'
       ],
       correctAnswer: '2019'
@@ -87,8 +87,20 @@ const grabAnswer = (results, index) => {
     <h3>${results === "correct" ? "You got it!" : "Sorry..."}</h3>
 <p>${store.questions[index].correctAnswer}</p>
     <button id="nextQuestion">Next Question</button>
-    <p class="tally">Correct: ${store.score}, Incorrect: ${index - store.score}</p>
+    <p class="tally">Correct: ${store.score}, Incorrect: ${store.questionNumber - store.score}</p>
   </div>`
+}
+
+const grabResults = () => {
+return `<h2>Final Screen</h2>
+          <div class="block">
+            <h3>Voyage complete!</h3>
+            <p>You answered ${store.score} out of ${store.questions.length} questions correctly!</p>
+            <button>Try again</button>
+            <p></p>
+            <p><i>"Across the sea of space, the stars are other suns."</i></p>
+            <p>- Carl Sagan</p>
+          </div>`
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -126,6 +138,21 @@ const tally = () => {
   })
 }
 
+const nextQuestion = () => {
+  let index = 0 
+  $('main').on('click', '#nextQuestion', event => {
+    index++
+  if (store.questionNumber === store.questions.length) {
+    renderQuiz(grabResults()) }
+    else {renderQuiz(grabQuestion(index))}
+  }
+  )
+  }
+
+  
+  
+
+
 const beginQuiz = () => {
   $('#beginQuiz').click(event => {
     store.quizStarted = true;
@@ -137,6 +164,7 @@ const main = () => {
   renderQuiz();
   beginQuiz();
   tally()
+  nextQuestion()
 }
 
 $(main);
