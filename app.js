@@ -81,6 +81,16 @@ return `<h2>${store.questions[index].question}</h2>
           </div>`
 }
 
+const grabAnswer = (results, index) => {
+  return `<h2>Answered View</h2>
+  <div class="block">
+    <h3>${results==="correct" ? "You got it!" : "Sorry..."}</h3>
+<p>${store.questions[index].correctAnswer}</p>
+    <button id="nextQuestion">Next Question</button>
+    <p class="tally">Correct: ${store.score}, Incorrect: ${index - store.score}</p>
+  </div>`
+}
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
