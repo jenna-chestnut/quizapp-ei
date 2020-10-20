@@ -49,10 +49,42 @@ const store = {
 
 // These functions return HTML templates
 
+const grabStart = () => {
+  return ` <h2>Test your knowledge!</h2>
+  <div class="block">
+    <h3>Ready to start?</h3>
+    <button id="beginQuiz">
+      Click here!<br />
+    </button>
+    <p class="tally">5 questions total!</p>
+  </div>`
+}
+
+const grabQuestion = () => {
+
+}
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
+const renderQuiz = () => {
+  if (store.quizStarted === false) {
+    $('main').html(grabStart());
+  }
+}
 
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+const beginQuiz = () => {
+  $('#beginQuiz').click(event => {
+    ('main').html(--- grab first question callback-- -)
+  })
+}
+
+const main = () => {
+  renderQuiz();
+}
+
+$(main);
