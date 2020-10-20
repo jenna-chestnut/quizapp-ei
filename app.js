@@ -60,8 +60,25 @@ const grabStart = () => {
   </div>`
 }
 
-const grabQuestion = () => {
-
+const grabQuestion = (index) => {
+store.questionNumber++
+let option = store.questions[index].answers
+return `<h2>${store.questions[index].question}</h2>
+          <div class="block questions">
+            <h3>Question ${store.questionNumber}</h3>
+            <form id="questionForm">                
+              <input type="radio" id="A" value="${option[0]}" name="spaceqs"></input>
+              <label for="A">${option[0]}</label>
+              <input type="radio" id="B" value="${option[1]}" name="spaceqs"></input>
+              <label for="B">${option[1]}</label>
+              <input type="radio" id="C" value="${option[2]}" name="spaceqs"></input>
+              <label for="C">${option[2]}</label>
+              <input type="radio" id="D" value="${option[3]}" name="spaceqs"></input>
+              <label for="D">${option[3]}</label>
+              <input type="submit" value="submit">
+            </form>
+            <p class="tally">Correct: ${store.score}, Incorrect: ${index - store.score}</p>
+          </div>`
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -77,14 +94,35 @@ const renderQuiz = () => {
 
 // These functions handle events (submit, click, etc)
 
+const tally = () => {
+  let index = 0
+  
+  $('main').submit(event => {
+    event.preventDefault() 
+    let correct = store.questions[index].correctAnswer
+    let checked = $('input[name="spaceqs"]:checked').val()
+    if (correct.includes(checked)){
+      store.score++
+      renderQuiz(grabAnswer("correct", index))
+      console.log("Yay!")
+    } else {
+      renderQuiz(grabAnswer("incorrect", index))
+      console.log("lame...")
+    }
+    index++
+  })
+}
+
 const beginQuiz = () => {
   $('#beginQuiz').click(event => {
-    ('main').html(--- grab first question callback-- -)
+    $('main').html(grabQuestion(0))
   })
 }
 
 const main = () => {
   renderQuiz();
+  beginQuiz();
+  tally()
 }
 
 $(main);
