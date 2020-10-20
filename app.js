@@ -1,6 +1,3 @@
-/**
- * Example store structure
- */
 const store = {
   // 5 or more questions are required
   questions: [
@@ -60,10 +57,10 @@ const grabStart = () => {
   </div>`
 }
 
-const grabQuestion = (index) => {
+const grabQuestion = (i) => {
   store.questionNumber++
-  let option = store.questions[index].answers
-  return `<h2>${store.questions[index].question}</h2>
+  let option = store.questions[i].answers
+  return `<h2>${store.questions[i].question}</h2>
           <div class="block questions">
             <h3>Question ${store.questionNumber}</h3>
             <form id="questionForm">                
@@ -77,26 +74,26 @@ const grabQuestion = (index) => {
               <label for="D">${option[3]}</label>
               <input type="submit" value="submit">
             </form>
-            <p class="tally">Correct: ${store.score}, Incorrect: ${index - store.score}</p>
+            <p class="tally">Correct: ${store.score}, Incorrect: ${i - store.score}</p>
           </div>`
 }
 
-const grabAnswer = (results, index) => {
+const grabAnswer = (results, i) => {
   return `<h2>Answered View</h2>
   <div class="block">
     <h3>${results === "correct" ? "You got it!" : "Sorry..."}</h3>
-<p>${store.questions[index].correctAnswer}</p>
+<p>${store.questions[i].correctAnswer}</p>
     <button id="nextQuestion">Next Question</button>
     <p class="tally">Correct: ${store.score}, Incorrect: ${store.questionNumber - store.score}</p>
   </div>`
 }
 
 const grabResults = () => {
-return `<h2>Final Screen</h2>
+  return `<h2>Final Screen</h2>
           <div class="block">
             <h3>Voyage complete!</h3>
             <p>You answered ${store.score} out of ${store.questions.length} questions correctly!</p>
-            <button>Try again</button>
+            <button id="restartQuiz">Try again</button>
             <p></p>
             <p><i>"Across the sea of space, the stars are other suns."</i></p>
             <p>- Carl Sagan</p>
@@ -119,10 +116,11 @@ const renderQuiz = (callback) => {
 
 // These functions handle events (submit, click, etc)
 
-const tally = () => {
-  let index = 0
+let index = 0;
 
-  $('main').submit(event => {
+const tally = () => {
+
+  $('main').on('submit', event => {
     event.preventDefault()
     let correct = store.questions[index].correctAnswer
     let checked = $('input[name="spaceqs"]:checked').val()
@@ -134,37 +132,43 @@ const tally = () => {
       renderQuiz(grabAnswer("incorrect", index))
       console.log("lame...")
     }
-    index++
+    index++;
   })
 }
 
 const nextQuestion = () => {
-  let index = 0 
   $('main').on('click', '#nextQuestion', event => {
-    index++
-  if (store.questionNumber === store.questions.length) {
-    renderQuiz(grabResults()) }
-    else {renderQuiz(grabQuestion(index))}
+    if (store.questionNumber === store.questions.length) {
+      renderQuiz(grabResults())
+    }
+    else { renderQuiz(grabQuestion(index)) }
   }
   )
-  }
-
-  
-  
-
+}
 
 const beginQuiz = () => {
-  $('#beginQuiz').click(event => {
+  $('main').on('click', '#beginQuiz', event => {
     store.quizStarted = true;
     $('main').html(grabQuestion(0))
+  })
+}
+
+const restartQuiz = () => {
+  $('main').on('click', '#restartQuiz', event => {
+    index = 0;
+    store.quizStarted = false;
+    store.score = 0;
+    store.questionNumber = 0;
+    renderQuiz(grabStart());
   })
 }
 
 const main = () => {
   renderQuiz();
   beginQuiz();
-  tally()
-  nextQuestion()
+  tally();
+  nextQuestion();
+  restartQuiz();
 }
 
 $(main);
