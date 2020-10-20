@@ -61,9 +61,9 @@ const grabStart = () => {
 }
 
 const grabQuestion = (index) => {
-store.questionNumber++
-let option = store.questions[index].answers
-return `<h2>${store.questions[index].question}</h2>
+  store.questionNumber++
+  let option = store.questions[index].answers
+  return `<h2>${store.questions[index].question}</h2>
           <div class="block questions">
             <h3>Question ${store.questionNumber}</h3>
             <form id="questionForm">                
@@ -84,7 +84,7 @@ return `<h2>${store.questions[index].question}</h2>
 const grabAnswer = (results, index) => {
   return `<h2>Answered View</h2>
   <div class="block">
-    <h3>${results==="correct" ? "You got it!" : "Sorry..."}</h3>
+    <h3>${results === "correct" ? "You got it!" : "Sorry..."}</h3>
 <p>${store.questions[index].correctAnswer}</p>
     <button id="nextQuestion">Next Question</button>
     <p class="tally">Correct: ${store.score}, Incorrect: ${index - store.score}</p>
@@ -94,9 +94,12 @@ const grabAnswer = (results, index) => {
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
-const renderQuiz = () => {
+const renderQuiz = (callback) => {
   if (store.quizStarted === false) {
     $('main').html(grabStart());
+  }
+  if (store.quizStarted === true) {
+    $('main').html(callback);
   }
 }
 
@@ -106,12 +109,12 @@ const renderQuiz = () => {
 
 const tally = () => {
   let index = 0
-  
+
   $('main').submit(event => {
-    event.preventDefault() 
+    event.preventDefault()
     let correct = store.questions[index].correctAnswer
     let checked = $('input[name="spaceqs"]:checked').val()
-    if (correct.includes(checked)){
+    if (correct.includes(checked)) {
       store.score++
       renderQuiz(grabAnswer("correct", index))
       console.log("Yay!")
@@ -125,6 +128,7 @@ const tally = () => {
 
 const beginQuiz = () => {
   $('#beginQuiz').click(event => {
+    store.quizStarted = true;
     $('main').html(grabQuestion(0))
   })
 }
