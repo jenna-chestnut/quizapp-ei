@@ -138,14 +138,12 @@ input[type="submit"]:hover,
 
 @media all and (min-width: 700px) {
   header {
-    padding: 20px;
+    padding: 10px;
     font-size: 30px;
-  }
-  h2 {
   }
   .block {
     border: 1px solid grey;
-    width: 75%;
+    width: 50%;
     margin: auto;
   }
   #beginQuiz {

@@ -145,7 +145,7 @@ const grabResults = () => {
           <div class="block">
             <h3>Your results:</h3>
             <Incorrect:>Correct: ${store.score}<br>
-             Incorrect: ${store.questionNumber - store.score}</p>
+             Incorrect: ${store.questionNumber - store.score} ${store.score < store.questionNumber / 2 ? '?! You spaced out!' : ''}</p>
             <img src="./images/planets-sliced-2.jpg">
             <button id="restartQuiz">Try again</button>
             <p></p>
