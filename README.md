@@ -4,6 +4,6 @@
 
 For a comprehensive and easy-to-edit code, we utilized several many functions and callbacks to make our app run.
 
-I chose space as my topic because I think it's a fun, universal idea that you can always stand to learn more from.
+I chose space as my topic because I think it's a fun, universal idea that you can always learn more about.
 
-#[Let's Connect!](https://linktr.ee/jenna.chestnut)
+[Let's Connect!](https://linktr.ee/jenna.chestnut)
