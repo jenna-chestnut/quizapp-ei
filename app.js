@@ -2,24 +2,70 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'What color is broccoli?',
+      question: `How many "Earth"s would fit inside of Jupiter?`,
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        '9',
+        '16',
+        '367',
+        '1300'
       ],
-      correctAnswer: 'green'
+      correctAnswer: `1300 "Earth"s could fit inside of Jupiter!`,
+      imgSrc: './images/jupiter-on-its-side.jpg'
     },
     {
-      question: 'What is the current year?',
+      question: `What does space sound like?`,
       answers: [
-        '1970',
-        '2015',
-        '2020',
-        '2005'
+        'White noise',
+        'Nothing',
+        'Windy',
+        'Static'
       ],
-      correctAnswer: '2019'
+      correctAnswer: 'The sound of space? Nothing!',
+      imgSrc: './images/sound-of-space.jpeg'
+    },
+    {
+      question: `Is the Earth's rotation changing?`,
+      answers: [
+        'Yes, it\'s slowing down',
+        'Yes, it\'s speeding up',
+        'No',
+        'The Earth doesn\'t rotate'
+      ],
+      correctAnswer: 'Yes, it\'s slowing down.. slowly..',
+      imgSrc: './images/earth-rotating.jpg'
+    },
+    {
+      question: `At night, which star is closest to us?`,
+      answers: [
+        'The North Star',
+        'The Sun',
+        'Orion',
+        'Sirius'
+      ],
+      correctAnswer: 'Trick question! The Sun is ALWAYS the closest star!',
+      imgSrc: './images/stars-in-space.jpg'
+    },
+    {
+      question: `One day on Venus is equal to how many Earth days?`,
+      answers: [
+        '1 day',
+        '12 days',
+        '87 days',
+        '243 days'
+      ],
+      correctAnswer: '243 days on Earth is 1 day on Venus.',
+      imgSrc: './images/venus.jpg'
+    },
+    {
+      question: `How many moons does Jupiter have?`,
+      answers: [
+        '2 moons',
+        '79 moons',
+        '16 moons',
+        '7 moons'
+      ],
+      correctAnswer: 'Jupiter has 79 moons!',
+      imgSrc: './images/jupiters-moons.jpg'
     }
   ],
   quizStarted: false,
@@ -47,13 +93,14 @@ const store = {
 // These functions return HTML templates
 
 const grabStart = () => {
-  return ` <h2>Test your knowledge!</h2>
+  return ` <h2>Test your space knowledge!</h2>
   <div class="block">
-    <h3>Ready to start?</h3>
+    <h3>Ready for blastoff?</h3>
     <button id="beginQuiz">
-      Click here!<br />
+      <span>Click here!</span>
+      <img src="./images/flying-rocket.png" width="400"><br />
     </button>
-    <p class="tally">5 questions total!</p>
+    <p class="tally">${store.questions.length} questions total!</p>
   </div>`
 }
 
@@ -82,6 +129,7 @@ const grabAnswer = (results, i) => {
   return `<h2>Answered View</h2>
   <div class="block">
     <h3>${results === "correct" ? "You got it!" : "Sorry..."}</h3>
+    <img src="${store.questions[i].imgSrc}">
 <p>${store.questions[i].correctAnswer}</p>
     <button id="nextQuestion">Next Question</button>
     <p class="tally">Correct: ${store.score}, Incorrect: ${store.questionNumber - store.score}</p>
