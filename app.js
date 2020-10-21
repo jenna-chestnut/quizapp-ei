@@ -111,9 +111,9 @@ const grabQuestion = (i) => {
   return `<h2>Question ${store.questionNumber}</h2>
           <hr>
           <div class="block questions">
-            <h3>${store.questions[i].question}</h3>
-            <form id="questionForm">                
-              <input type="radio" id="A" value="${option[0]}" name="spaceqs" required></input>
+          <form id="questionForm">
+            <h3>${store.questions[i].question}</h3>                
+              <input type="radio" id="A" value="${option[0]}" name="spaceqs"></input>
               <label for="A">${option[0]}</label>
               <input type="radio" id="B" value="${option[1]}" name="spaceqs"></input>
               <label for="B">${option[1]}</label>
@@ -178,15 +178,19 @@ const tally = () => {
     event.preventDefault()
     let correct = store.questions[index].correctAnswer
     let checked = $('input[name="spaceqs"]:checked').val()
-    if (correct.includes(checked)) {
-      store.score++
-      renderQuiz(grabAnswer("correct", index))
-      console.log("Yay!")
+    if (checked === undefined) {
+      alert('Nice try.. Answer required!');
     } else {
-      renderQuiz(grabAnswer("incorrect", index))
-      console.log("lame...")
+      if (correct.includes(checked)) {
+        store.score++
+        renderQuiz(grabAnswer("correct", index))
+        console.log("Yay!")
+      } else {
+        renderQuiz(grabAnswer("incorrect", index))
+        console.log("lame...")
+      }
+      index++;
     }
-    index++;
   })
 }
 
