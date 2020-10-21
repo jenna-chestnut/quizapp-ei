@@ -9,7 +9,7 @@ const store = {
         '367',
         '1300'
       ],
-      correctAnswer: `1300 "Earth"s could fit inside of Jupiter!`,
+      correctAnswer: `1300 "Earth"s could fit inside of Jupiter! Jupiter is HUGE!`,
       imgSrc: './images/jupiter-on-its-side.jpg'
     },
     {
@@ -20,7 +20,7 @@ const store = {
         'Windy',
         'Static'
       ],
-      correctAnswer: 'The sound of space? Nothing!',
+      correctAnswer: 'Space sounds like - Nothing! If there was an explosion right next to your spaceship, you wouldn\'t know!',
       imgSrc: './images/sound-of-space.jpeg'
     },
     {
@@ -31,7 +31,7 @@ const store = {
         'No',
         'The Earth doesn\'t rotate'
       ],
-      correctAnswer: 'Yes, it\'s slowing down.. slowly..',
+      correctAnswer: 'Yes, it\'s slowing down.. verrryyyy slowly..',
       imgSrc: './images/earth-rotating.jpg'
     },
     {
@@ -64,7 +64,7 @@ const store = {
         '16 moons',
         '7 moons'
       ],
-      correctAnswer: 'Jupiter has 79 moons!',
+      correctAnswer: 'Jupiter has 79 moons! SO MANY MOONS!',
       imgSrc: './images/jupiters-moons.jpg'
     }
   ],
@@ -93,11 +93,12 @@ const store = {
 // These functions return HTML templates
 
 const grabStart = () => {
-  return ` <h2>Test your space knowledge!</h2>
+  return ` <h2>TEST YOUR SPACE KNOWLEDGE</h2>
+  <hr>
   <div class="block">
-    <h3>Ready for blastoff?</h3>
+    <h2>Ready?</h2>
+    <h3>Click the rocket for takeoff!</h3>
     <button id="beginQuiz">
-      <span>Click here!</span>
       <img src="./images/flying-rocket.png" width="400"><br />
     </button>
     <p class="tally">${store.questions.length} questions total!</p>
@@ -107,11 +108,12 @@ const grabStart = () => {
 const grabQuestion = (i) => {
   store.questionNumber++
   let option = store.questions[i].answers
-  return `<h2>${store.questions[i].question}</h2>
+  return `<h2>Question ${store.questionNumber}</h2>
+          <hr>
           <div class="block questions">
-            <h3>Question ${store.questionNumber}</h3>
+            <h3>${store.questions[i].question}</h3>
             <form id="questionForm">                
-              <input type="radio" id="A" value="${option[0]}" name="spaceqs"></input>
+              <input type="radio" id="A" value="${option[0]}" name="spaceqs" required></input>
               <label for="A">${option[0]}</label>
               <input type="radio" id="B" value="${option[1]}" name="spaceqs"></input>
               <label for="B">${option[1]}</label>
@@ -119,16 +121,17 @@ const grabQuestion = (i) => {
               <label for="C">${option[2]}</label>
               <input type="radio" id="D" value="${option[3]}" name="spaceqs"></input>
               <label for="D">${option[3]}</label>
-              <input type="submit" value="submit">
+              <input type="submit" value="${store.questionNumber === store.questions.length ? 'get results' : 'check'}">
             </form>
             <p class="tally">Correct: ${store.score}, Incorrect: ${i - store.score}</p>
           </div>`
 }
 
 const grabAnswer = (results, i) => {
-  return `<h2>Answered View</h2>
+  return `<h2>${results === "correct" ? "You got it!" : "Sorry... wrong answer."}</h2>
+  <hr>
   <div class="block">
-    <h3>${results === "correct" ? "You got it!" : "Sorry..."}</h3>
+    <h3></h3>
     <img src="${store.questions[i].imgSrc}">
 <p>${store.questions[i].correctAnswer}</p>
     <button id="nextQuestion">Next Question</button>
@@ -137,10 +140,13 @@ const grabAnswer = (results, i) => {
 }
 
 const grabResults = () => {
-  return `<h2>Final Screen</h2>
+  return `<h2>Voyage complete!</h2>
+          <hr>
           <div class="block">
-            <h3>Voyage complete!</h3>
-            <p>You answered ${store.score} out of ${store.questions.length} questions correctly!</p>
+            <h3>Your results:</h3>
+            <Incorrect:>Correct: ${store.score}<br>
+             Incorrect: ${store.questionNumber - store.score} ${store.score < store.questionNumber / 2 ? '?! You spaced out!' : ''}</p>
+            <img src="./images/planets-sliced-2.jpg">
             <button id="restartQuiz">Try again</button>
             <p></p>
             <p><i>"Across the sea of space, the stars are other suns."</i></p>
